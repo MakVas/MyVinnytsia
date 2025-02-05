@@ -1,3 +1,173 @@
 <resources>
     <string name="app_name">MyVinnytsia</string>
+    <string name="tab_sights">Sights</string>
+    <string name="tab_lodging">Lodging</string>
+    <string name="tab_taste">Taste</string>
+
+    <string name="place_0_location">Roshen embankment, Karmeliuka St.</string>
+    <string name="place_0_name">Fountain on the Pivdennyi Buh</string>
+    <string name="place_0_description">
+        If you ask what to see in Vinnytsia, everyone will say without hesitation: first of all,
+        the light and music fountain Roshen on the Pivdennyi Buh, which was inaugurated in 2011.
+        It is currently the largest floating fountain in Europe. According to experts, it is also
+        among the ten most spectacular fountains in the world. The vertical jet is 60 meters high
+        and the frontal span is 140 meters. The use of a laser projector and a water-air screen
+        allows the demonstration of video in 3D. During the day, jets of water create an effect
+        of harmony and tranquility, and in the evening, a grand show begins: various multimedia
+        masterpieces are shown in front of a large open-air auditorium on a giant water canvas.
+        The combination of classical music, dance performances and vivid stories attracts people
+        to admire the show and makes the fountain a symbol of the City of ideas. Each thematic
+        program is not just an entertaining water show, but a real work of contemporary art and is
+        designed for the general public, regardless of age, gender and preferences.
+    </string>
+
+    <string name="place_1_location">city center</string>
+    <string name="place_1_name">European Square and Artynov Tower</string>
+    <string name="place_1_description">
+        The park around the square is located in the heart of the city and is one of the favorite
+        places for recreation. It is here that the Artynov Water Tower, the main symbol of
+        Vinnytsia and its business card, is located. At the beginning of the 20th century, the
+        architect Hryhorii Artynov designed it as a water pumping station for the city water supply
+        system and an observation tower of the fire-brigade. The clock was supposed to give it a
+        town hall-like appearance. For more than a hundred years of existence, the tower has
+        performed various functions and changed many residents. Currently, it is a home to the
+        Museum of Vinnytsia. Young musicians often perform on European Square, themed locations are
+        set up during festivals and celebrations, and walking in the park is a pleasure at any time
+        of the year. The melody of the legendary Shchedryk (Carol of the Bells) by Leontovych,
+        which made him famous all over the world, is heard from the tower.
+</string>
+
+    <string name="place_2_location">city center</string>
+    <string name="place_2_name">Soborna Street</string>
+    <string name="place_2_description">
+        It was once called Mykolaivska Avenue, then Poshtova. Today it has an extremely elegant
+        name — Soborna. At all times, the main artery of the city has been in the vortex of
+        events. Decorated with monumental structures, majestic buildings of different historical
+        eras, it attracts tourists from different countries. The author of many architectural
+        masterpieces was the first city architect Hryhorii Artynov. The buildings of the City Duma
+        and the women’s gymnasium, the elegant Savoy Hotel – the architect actually created the
+        face of the city. Part of the street is paved with cobblestones, which also gives it a
+        special, historic charm.
+    </string>
+
+    <string name="place_3_location">155 Pirogova St</string>
+    <string name="place_3_name">National Pirogov`s Estate Museum</string>
+    <string name="place_3_description">
+        The main tourist attractions of the City of ideas are headed by the Pirogov Museum in
+        Vinnytsia. When asked “What to see in Vinnytsia first?” every resident of Vinnytsia will
+        confidently name this iconic place, along with the Mykhailo Kotsiubynskyi Museum-Estate,
+        the legendary Vinnytsia Mures, or the Vinnytsia Catacombs. For a long time, Nikolai Pirogov
+        was the center of the city’s life, settling in the picturesque Vyshnia estate. He was a
+        world-renowned scientist, a brilliant surgeon, and a talented teacher whose achievements
+        are hard to overestimate. It was here that the “Vinnytsia stage” of his life, which lasted
+        more than 20 years, took place. To this day, grateful descendants visit the National
+        Pirogov’s Estate Museum and the church-tomb of Pirogov, where his embalmed body lies.
+        Tourists from all over the world come here! The museum and estate complex, dedicated to the
+        life and work of the prominent surgeon, is located in a picturesque place near Vyshenske
+        Lake. Today, it is not only a cultural landmark of Vinnytsia, but also one of the most
+        popular tourist attractions in the city. Here you can delve into the life story of an
+        extraordinary person, learn a lot of interesting things about an outstanding doctor,
+        enjoy a walk in a cozy park and buy souvenirs. By the way, you can also buy nice little
+        things to remember your trip and useful things in other parts of the city.
+    </string>
+
+    <string name="place_4_location">34 Soborna St</string>
+    <string name="place_4_name">Hotel France</string>
+    <string name="place_4_description">
+        Address: 34 Soborna St.
+        Phones:
+        Reception: +380 68 055-88-88,
+        Reservation Department: +380 63 552-92-11,
+        Conference Service: +380 68 055-88-87.
+        Website: hotelfrance.com.ua
+        Facebook: https://www.facebook.com/hotelfranceua/
+    </string>
+
+    <string name="place_5_location">15 Khlibna St</string>
+    <string name="place_5_name">Fenix Town</string>
+    <string name="place_5_description">
+        Address: 15 Khlibna St.
+        Phone: +380 96 000-26-08
+        Website: fenix-hotel.com.ua/hotel-fenix-town
+        Instagram: https://is.gd/2NEKrV
+    </string>
+
+    <string name="place_6_location">57а Arkhitektora Artynova St</string>
+    <string name="place_6_name">Smart Apart</string>
+    <string name="place_6_description">
+        Address: 57a, Arkhitektora Artynova St.
+        Phone: +380 98 054-54-55
+        Website: smartapart.net
+        Social networks:
+        Facebook: https://www.facebook.com/smartapart.vinnytsia/
+        Instagram: https://is.gd/SJPICU
+    </string>
+
+    <string name="place_7_location">18 Yunosti Ave</string>
+    <string name="place_7_name">Small Hotel</string>
+    <string name="place_7_description">
+        Address: Prospekt Yunosti, 18.
+        Phone: +380 93 930-11-11
+        Website: https://small-hotel.com.ua/
+        Social networks:
+        Facebook: Facebook.com/smalhotel
+        Instagram: Instagram.com/small.hotel
+    </string>
+
+    <string name="place_8_location">8 Mykoly Ovodova St</string>
+    <string name="place_8_name">Chernomorka restaurant</string>
+    <string name="place_8_description">
+        Shop-restaurant of the chain of the same name. The menu includes fish and seafood caught on
+        our own pier in the village of Mykolaivka in the Odesa region.
+
+        18 Mykoly Ovodova St
+        +380 96 994-05-05
+        https://www.instagram.com/chernomorka.vinnytsia
+    </string>
+
+    <string name="place_9_location">2 Karmeliuka St</string>
+    <string name="place_9_name">Ostannie Kytaiske bistro</string>
+    <string name="place_9_description">
+        Vinnytsia bistro of Pan-Asian cuisine, which offers a wide range of Far Eastern dishes.
+        Peking duck in a traditional serving, seafood and other delicacies of the Celestial Empire.
+
+        2 Karmeliuka St
+        +380 67 103-01-10
+        https://lastchinese.choiceqr.com
+        https://www.fb.com/lastchinese
+    </string>
+
+    <string name="place_10_location">121 Keletska St</string>
+    <string name="place_10_name">Red Zeppelin restaurant</string>
+    <string name="place_10_description">
+        American cuisine and rock aesthetics, tables for large groups on the atmospheric terrace,
+        appetizing dishes and a wide selection of different types of beers.
+
+        121 Keletska St (Plaza Park Mall)
+        +380 (97) 173-45-54,
+        +380 (63) 589-44-95.
+
+        https://facebook.com/zeppelinred/
+        https://www.instagram.com/redzeppelin_vn/
+    </string>
+
+    <string name="place_11_location">City center, Podillia, Vyshenka</string>
+    <string name="place_11_name">TerraMare restaurants</string>
+    <string name="place_11_description">
+        A network of trattorias in the main neighborhoods of Vinnytsia. Own salty and sweet
+        pastries, a large selection of pizzas and pastas, desserts for every taste.
+
+        76 Kotsyubynskoho Ave
+        +380 73 158-00-77
+
+        34 Zodchykh St
+        +380 68 136-67-67
+
+        61а Keletska St
+        +380 93 787-88-05
+        https://terramarenakel.choiceqr.com/
+
+        https://terramare.vn.ua
+        https://www.fb.com/terramare.vn
+    </string>
 </resources>
