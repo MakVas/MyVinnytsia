@@ -1,4 +1,6 @@
 package com.makvas.myvinnytsia.ui.utils
 
-enum class WindowStateUtils {
+enum class MyVinnytsiaContentType {
+    LIST_ONLY,
+    LIST_AND_DETAIL
 }
