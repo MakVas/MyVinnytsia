@@ -214,5 +214,17 @@
         \n
         https://www.fb.com/terramare.vn
     </string>
+
+    <string name="place_12_location">98 Keletska St</string>
+    <string name="place_12_name">VNTU Dormitory №5</string>
+    <string name="place_12_description">
+        All dormitories of VNTU are located compactly on the territory of the university within
+        10 - 15 minutes walk to any building of the university and near public transport
+        (trolleybus, tram, etc.). The dormitories are provided with furniture, utilities -
+        centralized heating, cold and hot water, showers, internet, security and other facilities
+        and services that ensure proper conditions for residents.
+    </string>
+
     <string name="back_button">back_button</string>
+
 </resources>

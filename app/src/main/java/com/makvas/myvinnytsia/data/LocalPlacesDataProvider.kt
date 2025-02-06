@@ -102,7 +102,15 @@ object LocalPlacesDataProvider {
                 placeDescription = R.string.place_11_description,
                 placeType = PlaceType.Taste,
                 placeImage = R.drawable.photo_11
-            )
+            ),
+            Place(
+                id = 12L,
+                placeLocation = R.string.place_12_location,
+                placeName = R.string.place_12_name,
+                placeDescription = R.string.place_12_description,
+                placeType = PlaceType.Lodging,
+                placeImage = R.drawable.photo_12
+            ),
         )
     }
 
