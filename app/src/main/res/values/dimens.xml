@@ -13,4 +13,5 @@
     <dimen name="padding_detail_content_vertical">24dp</dimen>
     <dimen name="padding_detail_content_horizontal">40dp</dimen>
     <dimen name="detail_image_height">400dp</dimen>
+    <dimen name="tab_indicator_width">60dp</dimen>
 </resources>

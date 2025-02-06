@@ -1,5 +1,6 @@
 package com.makvas.myvinnytsia.ui
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -33,11 +34,16 @@ import com.makvas.myvinnytsia.model.Place
 @Composable
 fun MyVinnytsiaDetailsScreen(
     modifier: Modifier = Modifier,
+    onBackPressed: () -> Unit,
     place: Place,
     contentPadding: PaddingValues = PaddingValues(0.dp),
 ) {
     val scrollState = rememberScrollState()
     val layoutDirection = LocalLayoutDirection.current
+
+    BackHandler {
+        onBackPressed()
+    }
 
     Box(
         modifier = modifier

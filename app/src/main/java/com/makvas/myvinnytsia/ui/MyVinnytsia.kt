@@ -1,28 +1,22 @@
 package com.makvas.myvinnytsia.ui
 
+import android.app.Activity
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.Hotel
-import androidx.compose.material.icons.filled.Place
-import androidx.compose.material.icons.filled.Restaurant
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.PrimaryTabRow
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Tab
-import androidx.compose.material3.TabRowDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
@@ -30,8 +24,7 @@ import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -62,6 +55,7 @@ fun MyVinnytsia(
     Scaffold(
         topBar = {
             MyVinnytsiaAppBar(
+                contentType = contentType,
                 isShowingHomepage = myVinnytsiaUiState.isShowingHomepage,
                 onBackPressed = { viewModel.resetHomeScreenStates() }
             )
@@ -81,6 +75,7 @@ fun MyVinnytsia(
                 viewModel.updateDetailsScreenStates(place = place)
             },
             contentPadding = innerPadding,
+            onBackPressed = { viewModel.resetHomeScreenStates() }
         )
     }
 }
@@ -95,31 +90,32 @@ private fun MyVinnytsiaMainScreen(
     places: List<Place>,
     onTabPressed: (PlaceType) -> Unit,
     onPlaceClick: (Place) -> Unit,
+    onBackPressed: () -> Unit,
     contentPadding: PaddingValues = PaddingValues(0.dp)
 ) {
 
     if (contentType == MyVinnytsiaContentType.LIST_AND_DETAIL) {
-        //TODO: Implement MyVinnytsiaListAndDetailsScreen
+        MyVinnytsiaListAndDetailsScreen(
+            selectedTab = selectedTab,
+            selectedPlace = selectedPlace,
+            places = places,
+            onTabPressed = onTabPressed,
+            onPlaceClick = onPlaceClick,
+            contentPadding = contentPadding,
+        )
     } else {
         AnimatedVisibility(
             visible = isShowingHomepage,
             enter = fadeIn(),
             exit = fadeOut(),
         ) {
-            Column(modifier.padding(contentPadding)) {
-                NavigationTabs(
-                    selectedTab = selectedTab,
-                    onTabPressed = onTabPressed,
-                )
-                MyVinnytsiaHomeScreen(
-                    places = places,
-                    onPlaceClick = onPlaceClick,
-                    modifier = Modifier.padding(
-                        start = dimensionResource(R.dimen.padding_medium),
-                        end = dimensionResource(R.dimen.padding_medium),
-                    )
-                )
-            }
+            MyVinnytsiaHomeScreen(
+                places = places,
+                selectedTab = selectedTab,
+                onTabPressed = onTabPressed,
+                onPlaceClick = onPlaceClick,
+                modifier = modifier.padding(contentPadding)
+            )
         }
         AnimatedVisibility(
             visible = !isShowingHomepage,
@@ -129,108 +125,57 @@ private fun MyVinnytsiaMainScreen(
             MyVinnytsiaDetailsScreen(
                 place = selectedPlace,
                 contentPadding = contentPadding,
+                onBackPressed = onBackPressed,
             )
         }
     }
 }
 
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun NavigationTabs(
-    selectedTab: PlaceType,
-    onTabPressed: ((PlaceType) -> Unit),
-    modifier: Modifier = Modifier
-) {
-    val tabsItemContentList = listOf(
-        NavigationItemContent(
-            placeType = PlaceType.Sights,
-            icon = Icons.Default.Place,
-            text = stringResource(id = R.string.tab_sights)
-        ),
-        NavigationItemContent(
-            placeType = PlaceType.Lodging,
-            icon = Icons.Default.Hotel,
-            text = stringResource(id = R.string.tab_lodging)
-        ),
-        NavigationItemContent(
-            placeType = PlaceType.Taste,
-            icon = Icons.Default.Restaurant,
-            text = stringResource(id = R.string.tab_taste)
-        ),
-    )
-
-    val color = when (selectedTab) {
-        PlaceType.Sights -> MaterialTheme.colorScheme.primary
-        PlaceType.Lodging -> MaterialTheme.colorScheme.secondary
-        PlaceType.Taste -> MaterialTheme.colorScheme.tertiary
-    }
-
-    val tabIndex = tabsItemContentList.indexOfFirst { it.placeType == selectedTab }
-
-    PrimaryTabRow(
-        selectedTabIndex = tabIndex,
-        containerColor = MaterialTheme.colorScheme.background,
-        contentColor = MaterialTheme.colorScheme.onBackground,
-        indicator = {
-            TabRowDefaults.PrimaryIndicator(
-                modifier = Modifier.tabIndicatorOffset(
-                    selectedTabIndex = tabIndex,
-                    matchContentSize = true
-                ),
-                shape = RoundedCornerShape(
-                    topStart = dimensionResource(id = R.dimen.tab_indicator_radius),
-                    topEnd = dimensionResource(id = R.dimen.tab_indicator_radius),
-                ),
-                color = color,
-            )
-        },
-        modifier = modifier
-    ) {
-        tabsItemContentList.forEachIndexed { _, itemContent ->
-            TabItem(
-                selected = selectedTab == itemContent.placeType,
-                itemContent = itemContent,
-                onTabPressed = onTabPressed,
-                selectedContentColor = color,
-            )
-        }
-    }
-
-}
-
-@Composable
-private fun TabItem(
-    selected: Boolean,
-    onTabPressed: ((PlaceType) -> Unit),
-    itemContent: NavigationItemContent,
-    selectedContentColor: Color,
+private fun MyVinnytsiaListAndDetailsScreen(
     modifier: Modifier = Modifier,
+    selectedTab: PlaceType,
+    selectedPlace: Place,
+    places: List<Place>,
+    onTabPressed: (PlaceType) -> Unit,
+    onPlaceClick: (Place) -> Unit,
+    contentPadding: PaddingValues = PaddingValues(0.dp)
 ) {
-    Tab(
-        selected = selected,
-        onClick = { onTabPressed(itemContent.placeType) },
-        icon = {
-            Icon(
-                imageVector = itemContent.icon,
-                contentDescription = itemContent.text
-            )
-        },
-        text = {
-            Text(
-                text = itemContent.text
-            )
-        },
-        selectedContentColor = selectedContentColor,
-        unselectedContentColor = MaterialTheme.colorScheme.onBackground,
-        modifier = modifier
-    )
-}
+    Row(modifier = modifier) {
+        MyVinnytsiaHomeScreen(
+            contentPadding = PaddingValues(
+                bottom = contentPadding.calculateBottomPadding()
+            ),
+            places = places,
+            selectedTab = selectedTab,
+            onTabPressed = onTabPressed,
+            onPlaceClick = onPlaceClick,
+            modifier = Modifier
+                .padding(
+                    top = contentPadding.calculateTopPadding()
+                )
+                .weight(2f)
 
+        )
+
+        val activity = LocalContext.current as Activity
+
+        MyVinnytsiaDetailsScreen(
+            place = selectedPlace,
+            contentPadding = PaddingValues(
+                top = contentPadding.calculateTopPadding(),
+            ),
+            modifier = Modifier.weight(3f),
+            onBackPressed = { activity.finish() }
+        )
+    }
+}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun MyVinnytsiaAppBar(
+    contentType: MyVinnytsiaContentType,
     isShowingHomepage: Boolean,
     onBackPressed: () -> Unit,
     modifier: Modifier = Modifier
@@ -243,7 +188,7 @@ private fun MyVinnytsiaAppBar(
             )
         },
         navigationIcon = {
-            if (isShowingHomepage) {
+            if (isShowingHomepage || contentType == MyVinnytsiaContentType.LIST_AND_DETAIL) {
                 Image(
                     painter = painterResource(id = R.drawable.gerb),
                     contentDescription = stringResource(id = R.string.app_name),
@@ -266,9 +211,3 @@ private fun MyVinnytsiaAppBar(
         modifier = modifier
     )
 }
-
-private data class NavigationItemContent(
-    val placeType: PlaceType,
-    val icon: ImageVector,
-    val text: String
-)
