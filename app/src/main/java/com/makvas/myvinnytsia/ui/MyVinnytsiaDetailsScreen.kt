@@ -57,7 +57,7 @@ fun MyVinnytsiaDetailsScreen(
                     painter = painterResource(place.placeImage),
                     contentDescription = null,
                     alignment = Alignment.TopCenter,
-                    contentScale = ContentScale.FillWidth,
+                    contentScale = ContentScale.Crop,
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(dimensionResource(R.dimen.detail_image_height))

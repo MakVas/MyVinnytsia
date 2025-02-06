@@ -3,7 +3,6 @@ package com.makvas.myvinnytsia.ui
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -23,7 +22,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.makvas.myvinnytsia.R
 import com.makvas.myvinnytsia.data.LocalPlacesDataProvider
 import com.makvas.myvinnytsia.model.Place
@@ -34,22 +32,21 @@ fun MyVinnytsiaHomeScreen(
     modifier: Modifier = Modifier,
     places: List<Place>,
     onPlaceClick: (Place) -> Unit,
-    contentPadding: PaddingValues = PaddingValues(0.dp),
 ) {
     LazyVerticalGrid(
         modifier = modifier,
-        contentPadding = contentPadding,
         columns = GridCells.Adaptive(
             minSize = dimensionResource(id = R.dimen.card_image_height)
         ),
-        verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_medium)),
         horizontalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_medium)),
     ) {
         items(places, key = { place -> place.id }) { place ->
             PlaceListItem(
                 place = place,
                 onPlaceClick = onPlaceClick,
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier
+                    .padding(top = dimensionResource(id = R.dimen.padding_medium),)
+                    .fillMaxWidth()
             )
         }
     }

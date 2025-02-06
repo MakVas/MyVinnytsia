@@ -22,7 +22,8 @@ import com.makvas.myvinnytsia.ui.MyVinnytsia
 import com.makvas.myvinnytsia.ui.theme.MyVinnytsiaTheme
 
 class MainActivity : ComponentActivity() {
-    @OptIn(ExperimentalMaterial3WindowSizeClassApi::class,
+    @OptIn(
+        ExperimentalMaterial3WindowSizeClassApi::class,
         ExperimentalMaterial3WindowSizeClassApi::class
     )
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,7 +42,7 @@ class MainActivity : ComponentActivity() {
                         )
                 ) {
                     val windowSize = calculateWindowSizeClass(this)
-                    
+
                     MyVinnytsia(windowSize = windowSize.widthSizeClass)
                 }
             }

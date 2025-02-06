@@ -1,5 +1,9 @@
 package com.makvas.myvinnytsia.ui
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInHorizontally
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -57,38 +61,26 @@ fun MyVinnytsia(
 
     Scaffold(
         topBar = {
-            Column {
-                MyVinnytsiaAppBar(
-                    isShowingHomepage = myVinnytsiaUiState.isShowingHomepage,
-                    onBackPressed = { viewModel.resetHomeScreenStates() }
-                )
-                if (myVinnytsiaUiState.isShowingHomepage) {
-                    NavigationTabs(
-                        selectedTab = myVinnytsiaUiState.currentPlaceType,
-                        onTabPressed = { placeType: PlaceType ->
-                            viewModel.updateCurrentPlaceType(placeType = placeType)
-                            viewModel.resetHomeScreenStates()
-                        },
-                    )
-                }
-            }
+            MyVinnytsiaAppBar(
+                isShowingHomepage = myVinnytsiaUiState.isShowingHomepage,
+                onBackPressed = { viewModel.resetHomeScreenStates() }
+            )
         }
     ) { innerPadding ->
         MyVinnytsiaMainScreen(
             contentType = contentType,
             selectedPlace = myVinnytsiaUiState.currentSelectedPlace,
+            selectedTab = myVinnytsiaUiState.currentPlaceType,
             isShowingHomepage = myVinnytsiaUiState.isShowingHomepage,
             places = myVinnytsiaUiState.currentPlaceList,
+            onTabPressed = { placeType: PlaceType ->
+                viewModel.updateCurrentPlaceType(placeType = placeType)
+                viewModel.resetHomeScreenStates()
+            },
             onPlaceClick = { place: Place ->
                 viewModel.updateDetailsScreenStates(place = place)
             },
             contentPadding = innerPadding,
-            modifier = Modifier
-                .padding(
-                    top = dimensionResource(R.dimen.padding_medium),
-                    start = dimensionResource(R.dimen.padding_medium),
-                    end = dimensionResource(R.dimen.padding_medium),
-                )
         )
     }
 }
@@ -96,10 +88,12 @@ fun MyVinnytsia(
 @Composable
 private fun MyVinnytsiaMainScreen(
     modifier: Modifier = Modifier,
+    selectedTab: PlaceType,
     selectedPlace: Place,
     isShowingHomepage: Boolean,
     contentType: MyVinnytsiaContentType,
     places: List<Place>,
+    onTabPressed: (PlaceType) -> Unit,
     onPlaceClick: (Place) -> Unit,
     contentPadding: PaddingValues = PaddingValues(0.dp)
 ) {
@@ -107,14 +101,31 @@ private fun MyVinnytsiaMainScreen(
     if (contentType == MyVinnytsiaContentType.LIST_AND_DETAIL) {
         //TODO: Implement MyVinnytsiaListAndDetailsScreen
     } else {
-        if (isShowingHomepage) {
-            MyVinnytsiaHomeScreen(
-                places = places,
-                onPlaceClick = onPlaceClick,
-                contentPadding = contentPadding,
-                modifier = modifier
-            )
-        } else {
+        AnimatedVisibility(
+            visible = isShowingHomepage,
+            enter = fadeIn(),
+            exit = fadeOut(),
+        ) {
+            Column(modifier.padding(contentPadding)) {
+                NavigationTabs(
+                    selectedTab = selectedTab,
+                    onTabPressed = onTabPressed,
+                )
+                MyVinnytsiaHomeScreen(
+                    places = places,
+                    onPlaceClick = onPlaceClick,
+                    modifier = Modifier.padding(
+                        start = dimensionResource(R.dimen.padding_medium),
+                        end = dimensionResource(R.dimen.padding_medium),
+                    )
+                )
+            }
+        }
+        AnimatedVisibility(
+            visible = !isShowingHomepage,
+            enter = fadeIn() + slideInHorizontally { it },
+            exit = fadeOut()
+        ) {
             MyVinnytsiaDetailsScreen(
                 place = selectedPlace,
                 contentPadding = contentPadding,
@@ -123,9 +134,10 @@ private fun MyVinnytsiaMainScreen(
     }
 }
 
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun NavigationTabs(
+fun NavigationTabs(
     selectedTab: PlaceType,
     onTabPressed: ((PlaceType) -> Unit),
     modifier: Modifier = Modifier
